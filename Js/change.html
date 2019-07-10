@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+*{ padding:0; margin:0; border:0; list-style:none;}
+#content01{width:100%; height:450px; background:#0d3cb2;}
+.banner{margin:0 auto;width:750px; height:450px; position: relative;}
+.banner ul{ position: relative; z-index:1; }
+.banner ul li{ display: none; position: absolute; left: 0; top: 0; }
+.banner ul .current { display:block; }
+
+.banner span{width:50px; height:100px; background:rgba(75,75,75,0.3) url(../images/banner_arr.png) no-repeat left center; position: absolute; left:0; top:170px; cursor: pointer; z-index:3;}
+.banner .right{right:0; left:auto; background-position:right center;}
+
+.banner ol{ width:750px; height:30px; position: absolute; left:0; bottom:0; ; line-height:30px; text-align: center; color:#fff; font-size:12px; z-index:2; }
+.banner ol li{float: left; width:74px; height:30px; margin-right:1px; background:rgba(0,0,0,0.2); cursor: pointer; visibility:visible;}
+.banner ol .current{ visibility:hidden;}
+</style>
+
+<script src="jquery-1.7.2.min.js"></script>
+<script>
+$(function(){	
+	function turnBanner(){	
+	
+		var bgcolors = ['#0d3cb2','#ffe641','#38158b','#69e5f1','#2776f5','#9a01f9','#cdeafa','#e8cd98','#f20c4d','#f33912']
+		$('#content01').each(function(index,element) {	
+			$(element).css('background',bgcolors[index] )
+		});
+		
+		var num =0;
+		var timer = null;
+		function sport(){	
+			clearInterval(timer);
+			timer = setInterval(function(){
+				$('.banner .right').click();
+			},3000)
+		}
+		
+		sport();
+		
+		$('.banner').hover(function(e) {
+			clearInterval(timer);
+		},function(){	
+			sport();
+		});
+	
+		$('.banner .right').click(function(e) {
+			num++;
+			if(num>9){ num = 0 };
+			same()
+		});
+		
+		$('.banner .left').click(function(e) {
+			num--;
+			if(num<0){ num = 9 };
+			same()
+		});
+		
+		$('.banner ol li').click(function(e) {
+			var index = $(this).index();
+			num = index;
+			same()
+		});
+	
+		function same(){	
+			$('.banner ul li').eq(num).stop().fadeIn().siblings().fadeOut();
+			$('.banner ol li').eq(num).addClass('current').siblings().removeClass('current')	
+		}
+	}
+	turnBanner();
+	
+})
+</script>
+</head>
+<body>
+<div id="content01">
+	<div class="banner">
+        <ul>
+            <li class="current"><img src="../images/banner/banner01.jpg" width="750" height="450" alt=""></li>
+            <li><img src="../images/banner/banner02.jpg" width="750" height="450" alt=""></li>
+            <li><img src="../images/banner/banner03.jpg" width="750" height="450" alt=""></li>
+            <li><img src="../images/banner/banner04.jpg" width="750" height="450" alt=""></li>
+            <li><img src="../images/banner/banner05.jpg" width="750" height="450" alt=""></li>
+            <li><img src="../images/banner/banner06.jpg" width="750" height="450" alt=""></li>
+            <li><img src="../images/banner/banner07.jpg" width="750" height="450" alt=""></li>
+            <li><img src="../images/banner/banner08.jpg" width="750" height="450" alt=""></li>
+            <li><img src="../images/banner/banner09.jpg" width="750" height="450" alt=""></li>
+            <li><img src="../images/banner/banner010.jpg" width="750" height="450" alt=""></li>
+        </ul>
+        <span class="left"></span><span class="right"></span>
+        <ol>
+            <li class="current">今日惊喜</li>
+            <li>服饰百货</li>
+            <li>手机3C</li>
+            <li>空调冰洗</li>
+            <li>彩电</li>
+            <li>烟灶/小家电</li>
+            <li>电器城</li>
+            <li>家装汽车</li>
+            <li>品牌活动</li>
+            <li>金融</li>
+        </ol>
+    </div>
+</div>
+</body>
+</html>
